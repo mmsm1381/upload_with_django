@@ -12,10 +12,27 @@
 
 <ul><p>your uploaded files :</p>
     {% for elm in files %}
-        <li><a href="{%elm.file.url%}">{{elm.name}}</a>_______{{elm.size}}(bytes)___________<a herf="">delete</a></li>
+        <li><a href="{{elm.body.url}}" download>{{elm.name}}</a>_______{{elm.size}}(bytes)___________<a href="{% url 'app_upload:delete' elm.id %}">delete</a></li>
         {%empty%}
-        <li>you havent upload any thing yet <a href="{% url 'app_upload:uploadfile' %}">upload here </a></li>
+                <li>you havent upload any thing yet <a href="{% url 'app_upload:uploadfile' %}">upload here </a></li>
     {%endfor%}
-    <h5>total:{{total}}</h5>
+    {% if files %}
+    <a href="{% url 'app_upload:uploadfile' %}">upload here </a>
+    <h5>total_size_of_your_uploads:{{total}}bytes</h5>
+    {%endif%}
+</ul>
+
+
+
+
+<ul><p>your friend uploadfile that u can see:</p>
+    {% for elm in friend_file %}
+        <li><a href="{{elm.body.url}}" download>{{elm.name}}</a>_______{{elm.size}}(bytes)_________{{elm.user.username}}</li>
+        {%empty%}
+        <li>nobody has sent u any thing yet </li>
+    {%endfor%}
+    {% if friend_file %}
+        <h5>total_size:{{friend_total}}bytes</h5>
+    {%endif%}
 </ul>
 {% endblock content %}
