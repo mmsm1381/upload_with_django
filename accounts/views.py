@@ -31,6 +31,8 @@ def logout(request):
 @login_required
 def profile(request):
     qs = Flile.objects.filter(user=request.user)
+    friend_file =Flile.objects.filter(visitors__id=request.user.id)
+    firend_total = friend_file.aggregate(sum('size'))
     total = qs.aggregate(Sum('size'))
-    ctx = {"files":qs,"total":total["size__sum"]}
+    ctx = {"files":qs,"total":total["size__sum"],"friend_file":friend_file,"firend_total":firend_total["size__sum"]}
     return render(request,"profile.html",ctx)

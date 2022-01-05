@@ -6,7 +6,7 @@ class UploadFileForm(forms.ModelForm):
 
     class Meta:
         model = Flile
-        fields = ("name","body")
+        fields = ("name","body","visitors")
 
     def save(self,*args,**kwargs):
         user = kwargs.pop("user")

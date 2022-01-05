@@ -1,9 +1,12 @@
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
 from django.views.generic import View
 from .forms import UploadFileForm
 from django.http.response import HttpResponse
-import mimetypes
+from .models import Flile
+from django.utils.decorators import method_decorator
 
+@method_decorator(login_required,name='dispatch')
 class UploadFile(View):
     def get(self,request):
         form = UploadFileForm()
@@ -15,13 +18,11 @@ class UploadFile(View):
         form = UploadFileForm(request.POST,request.FILES)
         if form.is_valid():
             file = form.save(user=request.user,size=request.FILES["body"].size)
+        return redirect("home")
 
 
-def download_file(request,fl_path):
 
-    fl = open(fl_path, "r")
-    mime_type, _ = mimetypes.guess_type(fl_path)
-    response = HttpResponse(fl, content_type=mime_type)
-    response['Content-Disposition'] = "attachment"
-    return response
 
+def delete(request,id):
+    file = Flile.objects.get(id=id).delete()
+    return redirect("accounts:profile")
