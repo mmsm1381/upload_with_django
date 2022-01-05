@@ -3,7 +3,7 @@ from django.views.generic import View
 from .forms import loginform
 from django.contrib.auth import authenticate , login , logout as _logout
 from app_upload.models import Flile
-from django.db.models import Sum
+from django.db.models import Sum as _sum
 from django.contrib.auth.decorators import login_required
 
 form = loginform()
@@ -32,7 +32,7 @@ def logout(request):
 def profile(request):
     qs = Flile.objects.filter(user=request.user)
     friend_file =Flile.objects.filter(visitors__id=request.user.id)
-    firend_total = friend_file.aggregate(sum('size'))
-    total = qs.aggregate(Sum('size'))
+    firend_total = friend_file.aggregate(_sum('size'))
+    total = qs.aggregate(_sum('size'))
     ctx = {"files":qs,"total":total["size__sum"],"friend_file":friend_file,"firend_total":firend_total["size__sum"]}
     return render(request,"profile.html",ctx)
