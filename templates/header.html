@@ -1,0 +1,13 @@
+<div id="header">
+    {% block header %}
+            {% if user.is_authenticated %}
+                <li>you are logged in as <a href="{%url 'accounts:profile'%}">{{request.user.username}}</a></li>
+                <li><a href="{% url 'accounts:logout' %}">logout</a></li>
+                <li><a href="{% url 'home' %}">home</a></li>
+            {% else %}
+                <li><a href="{% url 'accounts:login' %}">login</a></li>
+            {% endif %}
+    </ul>
+    {% endblock header %}
+
+</div>
