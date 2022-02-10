@@ -72,8 +72,8 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
 
+  Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
