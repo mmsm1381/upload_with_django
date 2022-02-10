@@ -15,4 +15,32 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+  running test in repository:
+    runs-on: ubuntu-latest
+    steps:
+    uses: actions/checkout@v2
+    - name: List files in the repository
+    run: |
+      ls ${{ github.workspace }}
+    -run: echo "🍏 This job's status is ${{ job.status }}."
+    -name: running test in repository
+    -run: ./manage.py test   
 
+
+
+
+
+
+
+# name: learn-github-actions
+# on: [push]
+# jobs:
+#   check-bats-version:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: actions/setup-node@v2
+#         with:
+#           node-version: '14'
+#       - run: npm install -g bats
+#       - run: bats -v
