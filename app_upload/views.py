@@ -13,8 +13,6 @@ class UploadFile(View):
         return render(request,"upload_file.html",{"form":form})
 
     def post(self,request):
-        print(request.POST)
-        print(request.FILES)
         form = UploadFileForm(request.POST,request.FILES)
         if form.is_valid():
             file = form.save(user=request.user,size=request.FILES["body"].size)
