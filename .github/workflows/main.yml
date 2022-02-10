@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-   running-test:
+  running-test:
     name : running-test
     runs-on: ubuntu-latest
     strategy:
@@ -27,6 +27,21 @@ jobs:
       - name: Run Tests
         run: |
           python manage.py test
+  
+  send_email:
+    name : send-email-on-push
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: send-email
+        run: |
+          /home/mahdi/django/upload/venv/bin/python /home/mahdi/django/upload/send_email.py
+
+
 
 
 
