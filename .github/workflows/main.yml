@@ -15,16 +15,8 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-  running test in repository:
-    runs-on: ubuntu-latest
-    steps:
-    uses: actions/checkout@v2
-    - name: List files in the repository
-    run: |
-      ls ${{ github.workspace }}
-    -run: echo "🍏 This job's status is ${{ job.status }}."
-    -name: running test in repository
-    -run: ./manage.py test   
+      -name: running test in repository
+      -run: ./manage.py test   
 
 
 
