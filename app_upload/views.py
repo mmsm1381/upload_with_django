@@ -24,3 +24,7 @@ class UploadFile(View):
 def delete(request,id):
     file = Flile.objects.get(id=id).delete()
     return redirect("accounts:profile")
+
+
+
+
