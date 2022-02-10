@@ -39,7 +39,7 @@ jobs:
           python-version: '3.8'
       - name: send-email
         run: |
-          /home/mahdi/django/upload/venv/bin/python /home/mahdi/django/upload/send_email.py
+          python send_email.py
 
 
 
