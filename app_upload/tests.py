@@ -13,6 +13,6 @@ class TestFileModel(TestCase):
 
     def test_file_model(self):
         file = Flile.objects.get(name="test")
-        self.assertEqual(print(file),file.name,"file str and name are not == ")
+        self.assertEqual(str(file),file.name,f"{str(file)} str and {file.name} are not == ")
 
 
